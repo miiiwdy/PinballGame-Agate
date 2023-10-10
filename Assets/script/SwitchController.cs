@@ -12,6 +12,8 @@ public class SwitchController : MonoBehaviour
     }
 
     public Collider bola;
+    public ScoreManager scoreManager;
+    public float score;
     public Material offMaterial;
     public Material onMaterial;
     public ManagerAudio audioManager;
@@ -19,7 +21,7 @@ public class SwitchController : MonoBehaviour
 
     private SwitchState state;
     private Renderer renderer;
-    private static List<SwitchController> blinkingSwitches = new List<SwitchController>(); // Store active blinking switches
+    private static List<SwitchController> blinkingSwitches = new List<SwitchController>();
 
     private void Start()
     {
@@ -62,10 +64,12 @@ public class SwitchController : MonoBehaviour
         if (state == SwitchState.On)
         {
             Set(false);
+            scoreManager.AddScore(score);
         }
         else
         {
             Set(true);
+            scoreManager.AddScore(score);
         }
     }
 
