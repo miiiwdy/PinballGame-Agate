@@ -5,6 +5,8 @@ using UnityEngine;
 public class LauncherController : MonoBehaviour
 {
   public Collider bola;
+  public Color colorA;
+  public Color colorB;
   public KeyCode input;
 
   public float maxTimeHold;
@@ -16,6 +18,8 @@ public class LauncherController : MonoBehaviour
   private void Start()
   {
     isHold = false;
+    renderer = GetComponent<Renderer>();
+    renderer.material.color = colorB;
   }
 
   private void OnCollisionStay(Collision collision)
@@ -31,6 +35,8 @@ public class LauncherController : MonoBehaviour
     if (Input.GetKey(input) && !isHold)
     {
       StartCoroutine(StartHold(collider));
+        renderer = GetComponent<Renderer>();
+        renderer.material.color = colorA;
     }
   }
 
@@ -46,6 +52,7 @@ public class LauncherController : MonoBehaviour
       force = Mathf.Lerp(0, maxForce, timeHold/maxTimeHold);
       yield return new WaitForEndOfFrame();
       timeHold += Time.deltaTime;
+  
     }
 
     /*collider.GetComponent<Rigidbody>();
@@ -53,5 +60,7 @@ public class LauncherController : MonoBehaviour
     Rigidbody rb = collider.GetComponent<Rigidbody>();
     rb.AddForce(Vector3.forward * force);
     isHold = false;
+    renderer = GetComponent<Renderer>();
+    renderer.material.color = colorB;
   }
 }
