@@ -10,7 +10,6 @@ public class MainMenuUIController : MonoBehaviour
     public Button exitButton;
     public Button creditButton;
 
-    // Start is called before the first frame update
     private void Start()
     {
         playButton.onClick.AddListener(PlayGame);
